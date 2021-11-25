@@ -1,0 +1,53 @@
+Implementare-comenzi-pt-lucrul-cu-SISTEME-DE-FISERE.
+
+UN DIRECTOR CONTINE REFERINTE ATAT PENTRU SUBDIRECTOARELE LUI, CAT SI PENTRU
+SUBFISIERELE SALE.
+
+int exists(Dir* parent, char* name) = VERIFICA DC EXISTA UN FILE/DIR CU 
+NUMELE PRIMIT(char* name) = verificare se face in toate subdirectoarele
+mod recusiv.
+
+void touch (Dir* parent, char* name) = se aloca memorie pt o structura 
+de tip File si se adauga in mod corespunzator.
+
+void mkdir (Dir* parent, char* name) = se aloca memorie pt o structura 
+de tip Dir si se adauga in mod corespunzator.
+
+void ls (Dir* parent) = se parcurge lista de directoare continute de parent
+si se afiseaza numele, la fel si pentru fisiere.
+
+void free_file(File* file) = goleste o structura de tipul File.
+
+void free_dir(Dir* dir) = Goleste recursiv un director. Se va elimina pentru
+fiecare director incepand din |dir|: toate fisierele lui, si se va apela 
+recursiv pt subdirectoarele lui.
+
+void rm (Dir* parent, char* name) = cauta dc exista un fisier cu acest nume,
+in caz afirmativ se elibereaza structura(cu free_file) si se refac legaturile de la nivelul
+listei inlantuita de fisiere in mod corespunzator(cum e specificat in enunt).
+
+void rmdir (Dir* parent, char* name) = cauta dc exista un director cu acest nume,
+in caz afirmativ se elibereaza structura(si restul directorului cu ajutorul lui
+free_dir) . Se refac legaturile de la nivelul listei inlantuita de fisiere
+in mod corespunzator(cum e specificat in enunt).
+
+void cd(Dir** target, char *name) = imi schimba directorul in care ma aflu.
+Se executa schimbarea efectiva numai in situatia in care exista un director
+cu numele primit ca parametru.
+
+char *pwd (Dir* target) = afiseaza calea pe care trebuie sa o parcurg pentru
+a ajunge in directorul "target", evident dc acesta exista.
+Se concateneaza la inceputul directorului curent parintele acestului pana se
+ajunge la root(parintele e null in acest caz). Se afiseaza efetiv stringul,
+care ulterior va fi eliberat in main().
+
+void stop (Dir* target) = cand se ajunge la executia lui stop programului meu
+nu ii vor mai fi neccesare structurile de directoare si fisiere alocate in
+procedurile precedent(mkdir, touch); deci se va dezaloca tot acest sistem de fisiere
+prin apelare free_dir pe root. (aici greseam initial pt ca nu pastram o copie
+a rootului si eu dezalocam de la punctul(directorul) la care ramasesem
+-dir se schimbase in urma apelului functiei cd).
+
+
+
+
